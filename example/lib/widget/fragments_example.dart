@@ -10,13 +10,15 @@ class FragmentsExample extends StatelessWidget {
           children: [
             Container(
               color: Colors.red,
-              width: 200,
-              height: 100,
+              width: 150,
+              height: 75,
+              child: Icon(Icons.favorite),
             ),
             Container(
               color: Colors.blue,
-              width: 200,
-              height: 100,
+              width: 150,
+              height: 75,
+              child: Icon(Icons.pages),
             )
           ],
         ),
@@ -24,21 +26,29 @@ class FragmentsExample extends StatelessWidget {
           children: [
             Container(
               color: Colors.green,
-              width: 200,
-              height: 100,
+              width: 150,
+              height: 75,
+              child: Icon(Icons.settings),
             ),
             Container(
               color: Colors.yellow,
-              width: 200,
-              height: 100,
+              width: 150,
+              height: 75,
+              child: Icon(Icons.animation),
             )
           ],
         ),
-        Image.asset(
-          './assets/rem.jpg',
-          width: 400,
-          height: 200,
-          fit: BoxFit.cover,
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              './assets/rem.jpg',
+              width: 300,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+            Text('Logic', style: TextStyle(fontSize: 40),),
+          ],
         )
       ],
     );

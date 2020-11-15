@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 
 class FragmentsController {
-  FragmentsController() {
+  FragmentsController({this.animationController}) {
     _globalKey = GlobalKey();
   }
 
@@ -44,22 +44,6 @@ class FragmentsController {
     boundary.toImage().then((value) {
       _image = value;
       onEnd?.call();
-    });
-  }
-
-  void addListener(VoidCallback listener) {
-    animationController?.addListener(listener);
-  }
-
-  void addStatusListener(AnimationStatusListener listener) {
-    animationController?.addStatusListener(listener);
-  }
-
-  void completed(VoidCallback callback) {
-    animationController.addStatusListener((AnimationStatus status) {
-      if (status == AnimationStatus.completed) {
-        callback?.call();
-      }
     });
   }
 

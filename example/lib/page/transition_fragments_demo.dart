@@ -13,6 +13,12 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
   FragmentsController controller = FragmentsController();
   Offset startingOffset = Offset.zero;
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +31,12 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
             controller.start();
           },
           child: Container(
-            width: 400,
-            height: 400,
+            width: 300,
+            height: 300,
             child: Fragments(
               fragmentsController: controller,
               startingOffset: startingOffset,
-              duration: Duration(milliseconds: 5000),
+              duration: Duration(milliseconds: 3000),
               child: const FragmentsExample(),
             ),
           ),

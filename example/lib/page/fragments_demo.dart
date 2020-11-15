@@ -25,8 +25,8 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
             controller.start();
           },
           child: Container(
-            width: 400,
-            height: 400,
+            width: 300,
+            height: 300,
             child: Fragments(
               fragmentsController: controller,
               startingOffset: startingOffset,
