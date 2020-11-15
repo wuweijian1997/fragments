@@ -47,7 +47,7 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
   }
 }
 ```
-![demo1.gif](https://github.com/wuweijian1997/fragments/tree/main/example/demo1.gif)
+![demo1.gif](https://github.com/wuweijian1997/fragments/blob/main/example/demo1.gif)
 ```
 
 class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
@@ -87,6 +87,6 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
 }
 
 ```
-![demo2.gif](https://github.com/wuweijian1997/fragments/tree/main/example/demo2.gif)
+![demo2.gif](https://github.com/wuweijian1997/fragments/blob/main/example/demo2.gif)
 
 
