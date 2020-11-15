@@ -7,30 +7,21 @@ import 'package:flutter_fragments/src/rendering/index.dart';
 class Fragments extends StatefulWidget {
   final Widget child;
 
-  /// Horizontal quantity
-  final int rowLength;
-
-  /// Vertical quantity
-  final int columnLength;
-
   final FragmentsController fragmentsController;
 
   ///Starting point.range[(0, 0), (child.width, child.height)]
-  final Offset startingPoint;
+  final Offset startingOffset;
   final Duration duration;
   final FragmentsDrawDelegate delegate;
 
   Fragments({
     Key key,
     this.child,
-    this.rowLength,
-    this.columnLength,
     this.duration = const Duration(milliseconds: 1000),
-    this.startingPoint = Offset.zero,
+    this.startingOffset = Offset.zero,
     @required this.fragmentsController,
-    this.delegate = const TransitionFragmentsDraw(),
-  })  : assert(rowLength > 0),
-        assert(columnLength > 0),
+    delegate,
+  })  : this.delegate = delegate ?? DefaultFragmentsDraw(),
         super(key: key);
 
   @override
@@ -41,11 +32,7 @@ class _FragmentsState extends State<Fragments>
     with SingleTickerProviderStateMixin {
   FragmentsController _fragmentsController;
 
-  int get rowLength => widget.rowLength;
-
-  int get columnLength => widget.columnLength;
-
-  Offset get startingPoint => widget.startingPoint;
+  Offset get startingOffset => widget.startingOffset;
 
   Duration get duration => widget.duration;
 
@@ -72,12 +59,9 @@ class _FragmentsState extends State<Fragments>
             key: _fragmentsController.globalKey,
             delegate: delegate,
             child: widget.child,
-            rowLength: rowLength,
-            columnLength: columnLength,
-            startingPoint: startingPoint,
+            startingOffset: startingOffset,
             image: _fragmentsController.image,
             progress: _fragmentsController.value,
-            imageSize: _fragmentsController.imageSize,
           );
         },
       ),

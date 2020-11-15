@@ -11,11 +11,8 @@ class FragmentsController {
   AnimationController animationController;
   ui.Image _image;
   GlobalKey _globalKey;
-  Size _imageSize;
 
   ui.Image get image => _image;
-
-  Size get imageSize => _imageSize;
 
   GlobalKey get globalKey => _globalKey;
 
@@ -32,7 +29,7 @@ class FragmentsController {
 
   ///Verify whether to use cache
   void _cacheVerification({@required VoidCallback event, bool disableCache}) {
-    if (disableCache == false && image != null && imageSize != null) {
+    if (disableCache == false && image != null ) {
       event?.call();
       return;
     }
@@ -45,7 +42,6 @@ class FragmentsController {
     RenderRepaintBoundary boundary =
         _globalKey.currentContext.findRenderObject();
     boundary.toImage().then((value) {
-      _imageSize = Size(value.width.toDouble(), value.height.toDouble());
       _image = value;
       onEnd?.call();
     });
@@ -70,7 +66,6 @@ class FragmentsController {
   void dispose() {
     animationController?.dispose();
     _image = null;
-    _imageSize = null;
     _globalKey = null;
   }
 }

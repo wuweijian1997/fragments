@@ -10,8 +10,8 @@ class Coordinate {
 
   maxDistance({int maxX, int maxY}) {
     assert(x != null && y != null);
-    int maxHorDistance = max(x, (x - maxX - 1).abs());
-    int maxVerDistance= max(y, (y- maxY - 1).abs());
+    int maxHorDistance = max(x, (x - maxX).abs());
+    int maxVerDistance= max(y, (y- maxY).abs());
     return sqrt(maxHorDistance * maxHorDistance + maxVerDistance * maxVerDistance);
   }
 

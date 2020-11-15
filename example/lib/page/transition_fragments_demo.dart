@@ -1,3 +1,4 @@
+import 'package:example/widget/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
 
@@ -10,7 +11,7 @@ class TransitionFragmentsDemo extends StatefulWidget {
 
 class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
   FragmentsController controller = FragmentsController();
-  Offset startingPoint = Offset.zero;
+  Offset startingOffset = Offset.zero;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
         child: GestureDetector(
           onTapUp: (TapUpDetails detail) {
             setState(() {
-              startingPoint = detail.localPosition;
+              startingOffset = detail.localPosition;
             });
             controller.start();
           },
@@ -27,56 +28,13 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
             width: 400,
             height: 400,
             child: Fragments(
-              rowLength: 10,
-              columnLength: 10,
               fragmentsController: controller,
-              startingPoint: startingPoint,
-              duration: Duration(milliseconds: 10000),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        color: Colors.red,
-                        width: 200,
-                        height: 100,
-                      ),
-                      Container(
-                        color: Colors.blue,
-                        width: 200,
-                        height: 100,
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        color: Colors.green,
-                        width: 200,
-                        height: 100,
-                      ),
-                      Container(
-                        color: Colors.yellow,
-                        width: 200,
-                        height: 100,
-                      )
-                    ],
-                  ),
-                  Image.asset(
-                    './assets/rem.jpg',
-                    width: 400,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  )
-                ],
-              ),
+              startingOffset: startingOffset,
+              duration: Duration(milliseconds: 5000),
+              child: const FragmentsExample(),
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => controller.start(),
       ),
     );
   }
