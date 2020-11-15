@@ -105,25 +105,4 @@ class DefaultFragmentsDraw extends FragmentsDrawDelegate {
     int y = ((startingOffset.dy ~/ fragmentsHeight)).clamp(0, columnLength);
     return Coordinate(x: x, y: y);
   }
-
-  List<List<Rect>> initFragments({
-    Size size,
-    Offset startingOffset = Offset.zero,
-  }) {
-    assert(startingOffset != null);
-    assert(rowLength != 0 && columnLength != 0);
-    double fragmentsWidth = size.width / rowLength;
-    double fragmentsHeight = size.height / columnLength;
-    List<List<Rect>> list = List(rowLength);
-    for (int i = 0; i < rowLength; i++) {
-      for (int j = 0; j < columnLength; j++) {
-        if (list[i] == null) {
-          list[i] = List(columnLength);
-        }
-        list[i][j] = Rect.fromLTWH(fragmentsWidth * i, fragmentsHeight * j,
-            fragmentsWidth, fragmentsHeight);
-      }
-    }
-    return list;
-  }
 }
