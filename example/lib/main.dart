@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:example/page/index.dart';
+import 'package:flutter_fragments/flutter_fragments.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final List<PageModel> list = [
-    PageModel(title: FragmentsDemo.title, child: FragmentsDemo()),
-    PageModel(title: TransitionFragmentsDemo.title, child: TransitionFragmentsDemo()),
-    PageModel(title: CustomNumberFragmentsDemo.title, child: CustomNumberFragmentsDemo()),
+  final List<_PageModel> list = [
+    _PageModel(title: "Fragments", delegate: DefaultFragmentsDraw(disableTransition: true,)),
+    _PageModel(title: "TransitionFragments", delegate: DefaultFragmentsDraw()),
+    _PageModel(title: "CustomNumberFragments", delegate: DefaultFragmentsDraw(rowLength: 25, columnLength: 25),),
   ];
 
   @override
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final List<PageModel> list;
+  final List<_PageModel> list;
 
   HomePage({this.list});
 
@@ -39,11 +40,11 @@ class HomePage extends StatelessWidget {
       body: ListView.builder(
         itemCount: list.length,
         itemBuilder: (_, int index) {
-          PageModel model = list[index];
+          _PageModel model = list[index];
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return model.child;
+                return FragmentsDemo(delegate: model.delegate,);
               }));
             },
             child: Card(
@@ -67,9 +68,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class PageModel {
+class _PageModel {
   final String title;
-  final Widget child;
+  final FragmentsDrawDelegate delegate;
 
-  PageModel({this.title, this.child});
+  _PageModel({this.title, this.delegate});
 }

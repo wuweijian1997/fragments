@@ -4,6 +4,9 @@ import 'package:flutter_fragments/flutter_fragments.dart';
 
 class FragmentsDemo extends StatefulWidget {
   static final String title = "Fragments";
+  final FragmentsDrawDelegate delegate;
+
+  FragmentsDemo({@required this.delegate});
 
   @override
   _FragmentsDemoState createState() => _FragmentsDemoState();
@@ -12,6 +15,7 @@ class FragmentsDemo extends StatefulWidget {
 class _FragmentsDemoState extends State<FragmentsDemo> {
   FragmentsController controller = FragmentsController();
   Offset startingOffset = Offset.zero;
+  FragmentsDrawDelegate get delegate => widget.delegate;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +28,21 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
             });
             controller.start();
           },
-          child: Fragments(
-            fragmentsController: controller,
-            startingOffset: startingOffset,
-            delegate: DefaultFragmentsDraw(disableTransition: true),
-            child: const FragmentsExample(),
+          child: Container(
+            width: 300,
+            height: 300,
+            child: Stack(
+              children: [
+                Container(width: 300, height: 300, color: Colors.black,),
+                Fragments(
+                  fragmentsController: controller,
+                  startingOffset: startingOffset,
+                  delegate: delegate,
+                  child: const FragmentsExample(),
+                  duration: Duration(milliseconds: 3000),
+                ),
+              ],
+            ),
           ),
         ),
       ),
