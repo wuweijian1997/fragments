@@ -1,0 +1,1 @@
+export 'clip_tab_model.dart';
