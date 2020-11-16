@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   final List<_PageModel> list = [
     _PageModel(title: "Fragments", delegate: DefaultFragmentsDraw(disableTransition: true,)),
     _PageModel(title: "TransitionFragments", delegate: DefaultFragmentsDraw()),
-    _PageModel(title: "CustomNumberFragments", delegate: DefaultFragmentsDraw(rowLength: 25, columnLength: 25),),
+    _PageModel(title: "CustomNumberFragments", delegate: DefaultFragmentsDraw(rowLength: 30, columnLength: 30),),
   ];
 
   @override

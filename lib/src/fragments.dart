@@ -43,10 +43,12 @@ class _FragmentsState extends State<Fragments>
     super.initState();
     _fragmentsController = widget.fragmentsController;
     assert(_fragmentsController != null);
-    _fragmentsController.animationController = AnimationController(
-      vsync: this,
-      duration: duration,
-    );
+    if (_fragmentsController.animationController == null) {
+      _fragmentsController.animationController = AnimationController(
+        vsync: this,
+        duration: duration,
+      );
+    }
   }
 
   @override

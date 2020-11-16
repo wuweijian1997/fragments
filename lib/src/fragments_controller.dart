@@ -19,23 +19,13 @@ class FragmentsController {
   double get value => animationController?.value;
 
   void start({bool disableCache = false}) {
-    _cacheVerification(
-      disableCache: disableCache,
-      event: () {
-        animationController.forward(from: 0);
-      },
-    );
-  }
-
-  ///Verify whether to use cache
-  void _cacheVerification({@required VoidCallback event, bool disableCache}) {
     if (disableCache == false && image != null ) {
-      event?.call();
-      return;
+      animationController.forward(from: 0);
+    } else {
+      generateImage(() {
+        animationController.forward(from: 0);
+      });
     }
-    generateImage(() {
-      event?.call();
-    });
   }
 
   void generateImage(VoidCallback onEnd) {
