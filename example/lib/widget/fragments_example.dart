@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
 
 class FragmentsExample extends StatelessWidget {
-  const FragmentsExample();
+  final double width;
+  final double height;
+  const FragmentsExample({this.width = 300, this.height = 300});
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              color: Colors.red,
-              width: 150,
-              height: 75,
-              child: Icon(Icons.favorite),
-            ),
-            Container(
-              color: Colors.blue,
-              width: 150,
-              height: 75,
-              child: Icon(Icons.pages),
-            )
+            buildItem(Colors.red, Icon(Icons.favorite)),
+            buildItem(Colors.blue, Icon(Icons.pages)),
           ],
         ),
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              color: Colors.green,
-              width: 150,
-              height: 75,
-              child: Icon(Icons.settings),
-            ),
-            Container(
-              color: Colors.yellow,
-              width: 150,
-              height: 75,
-              child: Icon(Icons.animation),
-            )
+            buildItem(Colors.green, Icon(Icons.settings)),
+            buildItem(Colors.yellow, Icon(Icons.animation)),
           ],
         ),
         Stack(
@@ -51,6 +36,15 @@ class FragmentsExample extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  buildItem(Color color, Icon icon) {
+    return Container(
+      color: color,
+      width: width / 2,
+      height: height / 4,
+      child: icon,
     );
   }
 }

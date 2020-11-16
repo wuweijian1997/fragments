@@ -24,15 +24,11 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
             });
             controller.start();
           },
-          child: Container(
-            width: 300,
-            height: 300,
-            child: Fragments(
-              fragmentsController: controller,
-              startingOffset: startingOffset,
-              delegate: DefaultFragmentsDraw(disableTransition: true),
-              child: const FragmentsExample(),
-            ),
+          child: Fragments(
+            fragmentsController: controller,
+            startingOffset: startingOffset,
+            delegate: DefaultFragmentsDraw(disableTransition: true),
+            child: const FragmentsExample(),
           ),
         ),
       ),

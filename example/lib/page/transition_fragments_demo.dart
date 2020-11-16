@@ -30,15 +30,11 @@ class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
             });
             controller.start();
           },
-          child: Container(
-            width: 300,
-            height: 300,
-            child: Fragments(
-              fragmentsController: controller,
-              startingOffset: startingOffset,
-              duration: Duration(milliseconds: 3000),
-              child: const FragmentsExample(),
-            ),
+          child: Fragments(
+            fragmentsController: controller,
+            startingOffset: startingOffset,
+            duration: Duration(milliseconds: 3000),
+            child: const FragmentsExample(),
           ),
         ),
       ),

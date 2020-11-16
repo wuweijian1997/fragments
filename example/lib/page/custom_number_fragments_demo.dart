@@ -30,16 +30,12 @@ class _CustomNumberFragmentsDemoState extends State<CustomNumberFragmentsDemo> {
             });
             controller.start();
           },
-          child: Container(
-            width: 300,
-            height: 300,
-            child: Fragments(
-              fragmentsController: controller,
-              startingOffset: startingOffset,
-              duration: Duration(milliseconds: 3000),
-              delegate: DefaultFragmentsDraw(rowLength: 50, columnLength: 50),
-              child: const FragmentsExample(),
-            ),
+          child: Fragments(
+            fragmentsController: controller,
+            startingOffset: startingOffset,
+            duration: Duration(milliseconds: 3000),
+            delegate: DefaultFragmentsDraw(rowLength: 50, columnLength: 50),
+            child: const FragmentsExample(),
           ),
         ),
       ),
