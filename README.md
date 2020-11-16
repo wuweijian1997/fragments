@@ -8,6 +8,8 @@ dependencies:
   flutter_fragments: ^0.01
 ```
 ## example
+### Default effect
+
 ```
 class FragmentsDemo extends StatefulWidget {
   static final String title = "Fragments";
@@ -48,45 +50,25 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
 }
 ```
 ![demo1.gif](https://github.com/wuweijian1997/fragments/blob/main/example/demo1.gif)
+### Transition effects.
 ```
-
-class _TransitionFragmentsDemoState extends State<TransitionFragmentsDemo> {
-  FragmentsController controller = FragmentsController();
-  Offset startingOffset = Offset.zero;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          onTapUp: (TapUpDetails detail) {
-            setState(() {
-              startingOffset = detail.localPosition;
-            });
-            controller.start();
-          },
-          child: Container(
-            width: 300,
-            height: 300,
-            child: Fragments(
-              fragmentsController: controller,
-              startingOffset: startingOffset,
-              duration: Duration(milliseconds: 3000),
-              child: const FragmentsExample(),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
+Fragments(
+  fragmentsController: controller,
+  startingOffset: startingOffset,
+  duration: Duration(milliseconds: 3000),
+  child: const FragmentsExample(),
+),
 ```
 ![demo2.gif](https://github.com/wuweijian1997/fragments/blob/main/example/demo2.gif)
 
+### Number of custom fragment
+```
+Fragments(
+  fragmentsController: controller,
+  startingOffset: startingOffset,
+  duration: Duration(milliseconds: 3000),
+  delegate: DefaultFragmentsDraw(rowLength: 25, columnLength: 25),
+  child: const FragmentsExample(),
+),
+```
 

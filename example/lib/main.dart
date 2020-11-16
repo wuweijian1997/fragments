@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   final List<PageModel> list = [
     PageModel(title: FragmentsDemo.title, child: FragmentsDemo()),
     PageModel(title: TransitionFragmentsDemo.title, child: TransitionFragmentsDemo()),
+    PageModel(title: CustomNumberFragmentsDemo.title, child: CustomNumberFragmentsDemo()),
   ];
 
   @override
