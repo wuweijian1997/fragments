@@ -12,7 +12,6 @@ class Fragments extends StatefulWidget {
   ///Starting point.range[(0, 0), (child.width, child.height)]
   final Offset startingOffset;
   final Duration duration;
-  final FragmentsDrawDelegate delegate;
 
   Fragments({
     Key key,
@@ -20,9 +19,7 @@ class Fragments extends StatefulWidget {
     this.duration = const Duration(milliseconds: 1000),
     this.startingOffset = Offset.zero,
     @required this.fragmentsController,
-    delegate,
-  })  : this.delegate = delegate ?? DefaultFragmentsDraw(),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _FragmentsState createState() => _FragmentsState();
@@ -35,8 +32,6 @@ class _FragmentsState extends State<Fragments>
   Offset get startingOffset => widget.startingOffset;
 
   Duration get duration => widget.duration;
-
-  FragmentsDrawDelegate get delegate => widget.delegate;
 
   @override
   void initState() {
@@ -59,7 +54,7 @@ class _FragmentsState extends State<Fragments>
         builder: (context, child) {
           return FragmentsRenderObjectWidget(
             key: _fragmentsController.globalKey,
-            delegate: delegate,
+            delegate: _fragmentsController?.delegate,
             child: widget.child,
             startingOffset: startingOffset,
             image: _fragmentsController.image,

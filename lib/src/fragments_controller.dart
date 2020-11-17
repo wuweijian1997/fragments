@@ -3,10 +3,18 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart';
 
+import 'fragments_draw/index.dart';
+
 class FragmentsController {
-  FragmentsController({this.animationController}) {
+  FragmentsController({
+    this.animationController,
+    FragmentsDrawDelegate delegate,
+  }) {
+    this.delegate = delegate ?? DefaultFragmentsDraw();
     _globalKey = GlobalKey();
   }
+
+  FragmentsDrawDelegate delegate;
 
   AnimationController animationController;
   ui.Image _image;
@@ -19,7 +27,7 @@ class FragmentsController {
   double get value => animationController?.value;
 
   void start({bool disableCache = false}) {
-    if (disableCache == false && image != null ) {
+    if (disableCache == false && image != null) {
       animationController.forward(from: 0);
     } else {
       generateImage(() {

@@ -12,10 +12,16 @@ class FragmentsDemo extends StatefulWidget {
   _FragmentsDemoState createState() => _FragmentsDemoState();
 }
 
-class _FragmentsDemoState extends State<FragmentsDemo> {
-  FragmentsController controller = FragmentsController();
+class _FragmentsDemoState extends State<FragmentsDemo> with SingleTickerProviderStateMixin {
+  FragmentsController controller;
   Offset startingOffset = Offset.zero;
   FragmentsDrawDelegate get delegate => widget.delegate;
+  AnimationController animationController;
+  @override
+  void initState() {
+    super.initState();
+    controller = FragmentsController(delegate: widget.delegate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,6 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
                 Fragments(
                   fragmentsController: controller,
                   startingOffset: startingOffset,
-                  delegate: delegate,
                   child: const FragmentsExample(),
                   duration: Duration(milliseconds: 3000),
                 ),
