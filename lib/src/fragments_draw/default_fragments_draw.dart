@@ -2,24 +2,19 @@ import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_fragments/src/fragments_draw/fragments_draw_delegate.dart';
+import 'package:flutter_fragments/flutter_fragments.dart';
 import 'package:flutter_fragments/src/models/index.dart';
 
-class DefaultFragmentsDraw extends FragmentsDrawDelegate {
+class DefaultFragmentsDraw extends RectFragmentsDrawDelegate {
   final bool disableTransition;
-  final int rowLength;
-  final int columnLength;
-  List<List<Rect>> _fragments;
-  Coordinate _startingCoordinate;
   Offset _startingOffset;
 
   DefaultFragmentsDraw({
+    numberOfRow = 20,
+    numberOfColumn = 20,
     this.disableTransition = false,
-    this.rowLength = 10,
-    this.columnLength = 10,
-  });
+  }) : super(numberOfColumn: numberOfColumn, numberOfRow: numberOfRow);
 
-  Coordinate get startingCoordinate => _startingCoordinate;
 
   @override
   void draw({
@@ -28,32 +23,32 @@ class DefaultFragmentsDraw extends FragmentsDrawDelegate {
     double progress,
     Offset startingOffset,
   }) {
-    Size imageSize = Size(paintImage.width.toDouble(), paintImage.height.toDouble());
+    Paint paint = Paint();
+    Size imageSize =
+        Size(paintImage.width.toDouble(), paintImage.height.toDouble());
     if (_startingOffset != startingOffset) {
-      _startingCoordinate = initCoordinate(
+      calculateStartingCoordinate(
         size: imageSize,
-        rowLength: rowLength,
-        columnLength: columnLength,
         startingOffset: startingOffset,
       );
+      _startingOffset = startingOffset;
     }
-    Paint paint = Paint();
     double maxDistance = startingCoordinate.maxDistance(
-      maxX: rowLength - 1,
-      maxY: columnLength - 1,
+      maxX: numberOfRow - 1,
+      maxY: numberOfColumn - 1,
     );
-    for (int i = 0; i < rowLength; i++) {
-      for (int j = 0; j < columnLength; j++) {
-        double currentProgress = calculateFragmentsProgress(
-          currentCoordinate: Coordinate(x: i, y: j),
-          startingCoordinate: startingCoordinate,
+    for (int i = 0; i < numberOfColumn; i++) {
+      for (int j = 0; j < numberOfRow; j++) {
+        double currentProgress = calculateFragmentProgress(
           maxDistance: maxDistance,
+          currentCoordinate: Coordinate(x: j, y: i),
         );
         if (currentProgress > progress) {
           Rect rect = calculateFragment(i: i, j: j, size: imageSize);
           if (disableTransition == false) {
             double opacity = 1;
-            double transition = (rowLength + columnLength) / (rowLength * columnLength);
+            double transition =
+                (numberOfRow + numberOfColumn) / (numberOfRow * numberOfColumn);
             transition = min(transition, .1);
             if (currentProgress - transition < progress) {
               opacity = .6;
@@ -68,41 +63,11 @@ class DefaultFragmentsDraw extends FragmentsDrawDelegate {
     }
   }
 
-  double calculateFragmentsProgress({
-    Coordinate currentCoordinate,
-    Coordinate startingCoordinate,
+  double calculateFragmentProgress({
     double maxDistance,
+    Coordinate currentCoordinate,
   }) {
     double distance = currentCoordinate.distance(startingCoordinate);
     return (distance / maxDistance).clamp(.0, 1.0);
-  }
-
-  Rect calculateFragment({int i, int j, Size size}) {
-    if(_fragments == null) {
-      _fragments = List(rowLength);
-    }
-    if(_fragments[i] == null) {
-      _fragments[i] = List(columnLength);
-    }
-    if(_fragments[i][j] == null) {
-      double fragmentsWidth = size.width / rowLength;
-      double fragmentsHeight = size.height / columnLength;
-      _fragments[i][j] = Rect.fromLTWH(fragmentsWidth * i, fragmentsHeight * j,
-          fragmentsWidth, fragmentsHeight);
-    }
-    return _fragments[i][j];
-  }
-
-  Coordinate initCoordinate({
-    Size size,
-    int rowLength,
-    int columnLength,
-    Offset startingOffset = Offset.zero,
-  }) {
-    double fragmentsWidth = size.width / rowLength;
-    int x = ((startingOffset.dx ~/ fragmentsWidth)).clamp(0, rowLength);
-    double fragmentsHeight = size.height / columnLength;
-    int y = ((startingOffset.dy ~/ fragmentsHeight)).clamp(0, columnLength);
-    return Coordinate(x: x, y: y);
   }
 }

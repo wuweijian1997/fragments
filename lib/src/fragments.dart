@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
-import 'package:flutter_fragments/src/fragments_draw/index.dart';
 import 'package:flutter_fragments/src/rendering/index.dart';
 
 class Fragments extends StatefulWidget {

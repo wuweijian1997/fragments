@@ -39,7 +39,7 @@ class _FragmentsDemoState extends State<FragmentsDemo> with SingleTickerProvider
             height: 300,
             child: Stack(
               children: [
-                Container(width: 300, height: 300, color: Colors.black,),
+                // Container(width: 300, height: 300, color: Colors.black,),
                 Fragments(
                   fragmentsController: controller,
                   startingOffset: startingOffset,
