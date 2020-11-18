@@ -53,6 +53,7 @@ class LineFragmentsDraw extends RectFragmentsDrawDelegate {
           direction: direction,
           maxDistance: maxDistance.toDouble(),
         );
+        currentProgress += (Random().nextDouble() - .5) / 10;
         if (currentProgress > progress) {
           Rect rect = calculateFragment(i: i, j: j, size: size);
           canvas.drawImageRect(paintImage, rect, rect, paint);
