@@ -5,7 +5,7 @@ flutter fragment effect
 Add this to your package's pubspec.yaml file:
 ```
 dependencies:
-  flutter_fragments: ^0.02
+  flutter_fragments: ^0.03
 ```
 ## example
 ### Default effect
