@@ -20,7 +20,7 @@ class _FragmentsDemoState extends State<FragmentsDemo> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-    controller = FragmentsController(delegate: widget.delegate);
+    controller = FragmentsController();
   }
 
   @override
@@ -41,6 +41,7 @@ class _FragmentsDemoState extends State<FragmentsDemo> with SingleTickerProvider
               children: [
                 // Container(width: 300, height: 300, color: Colors.black,),
                 Fragments(
+                  delegate: delegate,
                   fragmentsController: controller,
                   startingOffset: startingOffset,
                   child: const FragmentsExample(),

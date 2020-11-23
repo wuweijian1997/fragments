@@ -1,20 +1,14 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'fragments_draw/index.dart';
 
 class FragmentsController {
   FragmentsController({
     this.animationController,
-    FragmentsDrawDelegate delegate,
   }) {
-    this.delegate = delegate ?? DefaultFragmentsDraw();
     _globalKey = GlobalKey();
   }
-
-  FragmentsDrawDelegate delegate;
 
   AnimationController animationController;
   ui.Image _image;
