@@ -5,7 +5,7 @@ flutter fragment effect
 Add this to your package's pubspec.yaml file:
 ```
 dependencies:
-  flutter_fragments: ^0.0.3
+  flutter_fragments: ^0.0.4
 ```
 ## example
 ### Default effect
@@ -39,7 +39,7 @@ class _FragmentsDemoState extends State<FragmentsDemo> {
             child: Fragments(
               fragmentsController: controller,
               startingOffset: startingOffset,
-              delegate: DefaultFragmentsDraw(disableTransition: true),
+              delegate: RadialFragmentsDraw(disableTransition: true),
               child: const FragmentsExample(),
             ),
           ),
@@ -67,8 +67,18 @@ Fragments(
   fragmentsController: controller,
   startingOffset: startingOffset,
   duration: Duration(milliseconds: 3000),
-  delegate: DefaultFragmentsDraw(rowLength: 25, columnLength: 25),
+  delegate: RadialFragmentsDraw(rowLength: 25, columnLength: 25),
   child: const FragmentsExample(),
 ),
 ```
 
+### Size fragment
+```
+Fragments(
+  fragmentsController: controller,
+  startingOffset: startingOffset,
+  duration: Duration(milliseconds: 3000),
+  delegate: SizeFragmentsDrawDelegate(size: Size(20, 20)),
+  child: const FragmentsExample(),
+),
+```

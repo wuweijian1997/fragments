@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
 import 'package:flutter_fragments/src/models/index.dart';
 
-class DefaultFragmentsDraw extends RectFragmentsDrawDelegate {
+class RadialFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   final bool disableTransition;
   Offset _startingOffset;
 
-  DefaultFragmentsDraw({
+  RadialFragmentsDraw({
     numberOfRow = 20,
     numberOfColumn = 20,
     this.disableTransition = false,

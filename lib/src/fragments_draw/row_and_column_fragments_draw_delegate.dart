@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_fragments/flutter_fragments.dart';
 
-abstract class RectFragmentsDrawDelegate extends FragmentsDrawDelegate {
+abstract class RowAndColumnFragmentsDrawDelegate extends FragmentsDrawDelegate {
   ///行
   final int numberOfRow;
   ///列
@@ -10,7 +10,7 @@ abstract class RectFragmentsDrawDelegate extends FragmentsDrawDelegate {
   Coordinate _startingCoordinate;
   List<List<Rect>> _fragments;
 
-  RectFragmentsDrawDelegate({
+  RowAndColumnFragmentsDrawDelegate({
     this.numberOfRow,
     this.numberOfColumn,
   })  : assert(numberOfRow != null && numberOfRow > 0),

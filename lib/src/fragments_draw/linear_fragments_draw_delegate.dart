@@ -4,29 +4,29 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
 
-enum LineDirection {
+enum LinearDirection {
   top,
   bottom,
   left,
   right,
 }
 
-extension LineDirectionExten on LineDirection {
+extension LinearDirectionExten on LinearDirection {
   bool get vertical =>
-      this == LineDirection.top || this == LineDirection.bottom;
+      this == LinearDirection.top || this == LinearDirection.bottom;
 
   bool get horizontal =>
-      this == LineDirection.left || this == LineDirection.right;
+      this == LinearDirection.left || this == LinearDirection.right;
 }
 
-class LineFragmentsDraw extends RectFragmentsDrawDelegate {
+class LineFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   final int lines;
-  final LineDirection direction;
-  LineDirection _direction;
+  final LinearDirection direction;
+  LinearDirection _direction;
 
   LineFragmentsDraw({
     this.lines = 20,
-    this.direction = LineDirection.left,
+    this.direction = LinearDirection.left,
   }) : super(
           numberOfRow: direction.vertical ? 1 : lines,
           numberOfColumn: direction.vertical ? lines : 1,
@@ -63,13 +63,13 @@ class LineFragmentsDraw extends RectFragmentsDrawDelegate {
   }
 
   Offset calculateStartingOffsetWithDirection(
-    LineDirection direction,
+      LinearDirection direction,
     Size size,
   ) {
     Offset offset;
     switch (direction) {
-      case LineDirection.right:
-      case LineDirection.bottom:
+      case LinearDirection.right:
+      case LinearDirection.bottom:
         offset = size.bottomRight(Offset.zero);
         break;
       default:
@@ -80,21 +80,21 @@ class LineFragmentsDraw extends RectFragmentsDrawDelegate {
 
   double calculateFragmentProgress({
     Coordinate currentCoordinate,
-    LineDirection direction,
+    LinearDirection direction,
     double maxDistance,
   }) {
     double progress;
     switch (direction) {
-      case LineDirection.left:
+      case LinearDirection.left:
         progress = currentCoordinate.y / maxDistance;
         break;
-      case LineDirection.right:
+      case LinearDirection.right:
         progress = (numberOfColumn - currentCoordinate.y) / maxDistance;
         break;
-      case LineDirection.top:
+      case LinearDirection.top:
         progress = currentCoordinate.x / maxDistance;
         break;
-      case LineDirection.bottom:
+      case LinearDirection.bottom:
         progress = (numberOfRow - currentCoordinate.x) / maxDistance;
         break;
     }

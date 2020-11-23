@@ -20,7 +20,7 @@ class Fragments extends StatefulWidget {
     this.startingOffset = Offset.zero,
     @required this.fragmentsController,
     this.duration = const Duration(milliseconds: 1000),
-  })  : this.delegate = delegate ?? DefaultFragmentsDraw(),
+  })  : this.delegate = delegate ?? RadialFragmentsDraw(),
         super(key: key);
 
   @override

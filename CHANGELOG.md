@@ -9,4 +9,9 @@
 
 - Remove delegate from FragmentController
 
+## [0.0.4] - 2020/11/23
+
+- Feat: Size_fragments_draw_delegate
+
+
 
