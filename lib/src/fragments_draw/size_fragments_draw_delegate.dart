@@ -38,10 +38,9 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
       startingOffset: startingOffset,
     );
     double maxDistance = _startingCoordinate.maxDistance(
-      maxX: numberOfRow,
-      maxY: numberOfColumn,
+      maxX: numberOfRow - 1,
+      maxY: numberOfColumn - 1,
     );
-
     for (int i = 0; i < numberOfColumn; i++) {
       for (int j = 0; j < numberOfRow; j++) {
         double currentProgress = calculateFragmentProgress(
@@ -79,8 +78,8 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
   }
 
   void calculateRowAndColumn({Size size, Size imageSize}) {
-    numberOfRow = imageSize.width ~/ size.width;
-    numberOfColumn = imageSize.height ~/ size.height;
+    numberOfRow = (imageSize.width / size.width).ceil();
+    numberOfColumn = (imageSize.height / size.height).ceil();
   }
 
   double calculateFragmentProgress({

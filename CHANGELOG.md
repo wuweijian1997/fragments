@@ -13,5 +13,9 @@
 
 - Feat: Size_fragments_draw_delegate
 
+## [0.0.5] - 2020/11/23
+
+- Fix: Size_fragments_draw_delegate size error
+
 
 

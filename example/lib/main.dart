@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     _PageModel(title: "TransitionFragments", delegate: RadialFragmentsDraw()),
     _PageModel(title: "CustomNumberFragments", delegate: RadialFragmentsDraw(numberOfRow: 30, numberOfColumn: 30),),
     _PageModel(title: "LineFragments", delegate: LineFragmentsDraw(lines: 100, direction: LinearDirection.top)),
-    _PageModel(title: "SizeFragments", delegate: SizeFragmentsDrawDelegate(size: Size(30, 30))),
+    _PageModel(title: "SizeFragments", delegate: SizeFragmentsDrawDelegate(size: Size(36, 36))),
   ];
 
   @override
