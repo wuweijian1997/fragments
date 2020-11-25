@@ -17,5 +17,9 @@
 
 - Fix: Size_fragments_draw_delegate size error
 
+## [0.0.6] - 2020/11/25
+
+- feat: GestureFragments
+
 
 

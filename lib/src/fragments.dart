@@ -6,20 +6,20 @@ import 'package:flutter_fragments/src/rendering/index.dart';
 class Fragments extends StatefulWidget {
   final Widget child;
 
-  final FragmentsController fragmentsController;
+  final ScreenshotController screenshotController;
   final FragmentsDrawDelegate delegate;
+  final Animation animation;
 
   ///Starting point.range[(0, 0), (child.width, child.height)]
   final Offset startingOffset;
-  final Duration duration;
 
   Fragments({
     Key key,
     this.child,
+    this.animation,
     FragmentsDrawDelegate delegate,
     this.startingOffset = Offset.zero,
-    @required this.fragmentsController,
-    this.duration = const Duration(milliseconds: 1000),
+    @required this.screenshotController,
   })  : this.delegate = delegate ?? RadialFragmentsDraw(),
         super(key: key);
 
@@ -29,49 +29,30 @@ class Fragments extends StatefulWidget {
 
 class _FragmentsState extends State<Fragments>
     with SingleTickerProviderStateMixin {
-  FragmentsController _fragmentsController;
+  ScreenshotController get screenshotController => widget.screenshotController;
 
   Offset get startingOffset => widget.startingOffset;
 
-  Duration get duration => widget.duration;
-
   FragmentsDrawDelegate get delegate => widget.delegate;
 
-  @override
-  void initState() {
-    super.initState();
-    _fragmentsController = widget.fragmentsController;
-    assert(_fragmentsController != null);
-    if (_fragmentsController.animationController == null) {
-      _fragmentsController.animationController = AnimationController(
-        vsync: this,
-        duration: duration,
-      );
-    }
-  }
+  Animation<double> get animation => widget.animation;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedBuilder(
-        animation: _fragmentsController.animationController,
+        animation: animation,
         builder: (context, child) {
           return FragmentsRenderObjectWidget(
-            key: _fragmentsController.globalKey,
+            key: screenshotController.globalKey,
             delegate: delegate,
             child: widget.child,
             startingOffset: startingOffset,
-            image: _fragmentsController.image,
-            progress: _fragmentsController.value,
+            image: screenshotController.image,
+            progress: animation.value,
           );
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _fragmentsController.dispose();
-    super.dispose();
   }
 }

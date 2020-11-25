@@ -12,43 +12,25 @@ class FragmentsDemo extends StatefulWidget {
   _FragmentsDemoState createState() => _FragmentsDemoState();
 }
 
-class _FragmentsDemoState extends State<FragmentsDemo> with SingleTickerProviderStateMixin {
-  FragmentsController controller;
+class _FragmentsDemoState extends State<FragmentsDemo> {
   Offset startingOffset = Offset.zero;
   FragmentsDrawDelegate get delegate => widget.delegate;
-  AnimationController animationController;
-  @override
-  void initState() {
-    super.initState();
-    controller = FragmentsController();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: GestureDetector(
-          onTapUp: (TapUpDetails detail) {
-            setState(() {
-              startingOffset = detail.localPosition;
-            });
-            controller.start();
-          },
-          child: Container(
-            width: 300,
-            height: 300,
-            child: Stack(
-              children: [
-                // Container(width: 300, height: 300, color: Colors.black,),
-                Fragments(
-                  delegate: delegate,
-                  fragmentsController: controller,
-                  startingOffset: startingOffset,
-                  child: const FragmentsExample(),
-                  duration: Duration(milliseconds: 3000),
-                ),
-              ],
-            ),
+        child: Container(
+          width: 300,
+          height: 300,
+          child: Stack(
+            children: [
+              // Container(width: 300, height: 300, color: Colors.black,),
+              GestureFragments(
+                delegate: delegate,
+                child: const FragmentsExample(),
+              ),
+            ],
           ),
         ),
       ),

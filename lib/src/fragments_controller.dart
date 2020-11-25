@@ -1,47 +1,28 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_fragments/flutter_fragments.dart';
 
 class FragmentsController {
+  AnimationController _animationController;
+  ScreenshotController _screenshotController = ScreenshotController();
   FragmentsController({
-    this.animationController,
+    Duration duration = const Duration(milliseconds: 1000),
+    @required TickerProvider vsync,
   }) {
-    _globalKey = GlobalKey();
+    _animationController = AnimationController(vsync: vsync, duration: duration);
   }
 
-  AnimationController animationController;
-  ui.Image _image;
-  GlobalKey _globalKey;
+  ScreenshotController get screenshotController => _screenshotController;
 
-  ui.Image get image => _image;
+  Animation<double> get animation => _animationController.view;
 
-  GlobalKey get globalKey => _globalKey;
-
-  double get value => animationController?.value;
-
-  void start({bool disableCache = false}) {
-    if (disableCache == false && image != null) {
-      animationController.forward(from: 0);
-    } else {
-      generateImage(() {
-        animationController.forward(from: 0);
-      });
-    }
+  start() {
+    assert(_animationController != null);
+    assert(screenshotController != null);
+    screenshotController.start(callback: () => _animationController.forward(from: 0));
   }
 
-  void generateImage(VoidCallback onEnd) {
-    RenderRepaintBoundary boundary =
-        _globalKey.currentContext.findRenderObject();
-    boundary.toImage().then((value) {
-      _image = value;
-      onEnd?.call();
-    });
-  }
-
-  void dispose() {
-    animationController?.dispose();
-    _image = null;
-    _globalKey = null;
+  dispose() {
+    _animationController?.dispose();
+    _screenshotController.dispose();
   }
 }
