@@ -82,3 +82,5 @@ Fragments(
   child: const FragmentsExample(),
 ),
 ```
+### Fragment tab
+![fragments.gif](https://github.com/wuweijian1997/any_tab/blob/main/example/fragments.gif)

@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     _PageModel(title: "CustomNumberFragments", delegate: RadialFragmentsDraw(numberOfRow: 30, numberOfColumn: 30),),
     _PageModel(title: "LineFragments", delegate: LineFragmentsDraw(lines: 100, direction: LinearDirection.top)),
     _PageModel(title: "SizeFragments", delegate: SizeFragmentsDrawDelegate(size: Size(36, 36))),
+    _PageModel(title: "FragmentTab", page: FragmentsAnyTabPage()),
   ];
 
   @override
@@ -46,6 +47,9 @@ class HomePage extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                if(model.page != null) {
+                  return model.page;
+                }
                 return FragmentsDemo(delegate: model.delegate,);
               }));
             },
@@ -73,6 +77,7 @@ class HomePage extends StatelessWidget {
 class _PageModel {
   final String title;
   final FragmentsDrawDelegate delegate;
+  final Widget page;
 
-  _PageModel({this.title, this.delegate});
+  _PageModel({this.title, this.delegate, this.page});
 }
