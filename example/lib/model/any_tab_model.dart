@@ -5,5 +5,5 @@ class AnyTabModel {
   final String image;
   final String title;
 
-  AnyTabModel({this.color, this.image, this.title});
+  AnyTabModel({required this.color, required this.image, required this.title});
 }

@@ -22,7 +22,6 @@ extension LinearDirectionExten on LinearDirection {
 class LineFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   final int lines;
   final LinearDirection direction;
-  LinearDirection _direction;
 
   LineFragmentsDraw({
     this.lines = 20,
@@ -34,17 +33,15 @@ class LineFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
 
   @override
   void draw({
-    Canvas canvas,
-    ui.Image paintImage,
-    double progress,
-    Offset startingOffset,
+    required Canvas canvas,
+    required ui.Image paintImage,
+    required double progress,
+    required Offset startingOffset,
   }) {
     Paint paint = Paint();
     Size size = Size(paintImage.width.toDouble(), paintImage.height.toDouble());
-    if (direction != _direction) {
       Offset offset = calculateStartingOffsetWithDirection(direction, size);
       calculateStartingCoordinate(size: size, startingOffset: offset);
-    }
     int maxDistance = max(numberOfColumn, numberOfRow);
     for (int i = 0; i < numberOfColumn; i++) {
       for (int j = 0; j < numberOfRow; j++) {
@@ -79,9 +76,9 @@ class LineFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   }
 
   double calculateFragmentProgress({
-    Coordinate currentCoordinate,
-    LinearDirection direction,
-    double maxDistance,
+    required Coordinate currentCoordinate,
+    required LinearDirection direction,
+    required double maxDistance,
   }) {
     double progress;
     switch (direction) {

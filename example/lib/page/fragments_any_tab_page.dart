@@ -15,7 +15,7 @@ class FragmentsAnyTabPage extends StatefulWidget {
 
 class _FragmentsAnyTabPageState extends State<FragmentsAnyTabPage>
     with SingleTickerProviderStateMixin {
-  AnyTabController anyTabController;
+  late AnyTabController anyTabController;
   ScreenshotController screenShotController = ScreenshotController();
 
   @override

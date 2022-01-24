@@ -6,9 +6,9 @@ abstract class FragmentsDrawDelegate {
   const FragmentsDrawDelegate();
 
   void draw({
-    Canvas canvas,
-    ui.Image paintImage,
-    double progress,
-    Offset startingOffset,
+    required Canvas canvas,
+    required ui.Image paintImage,
+    required double progress,
+    required Offset startingOffset,
   });
 }

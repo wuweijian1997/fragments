@@ -6,8 +6,8 @@ class GestureFragments extends StatefulWidget {
   final FragmentsDrawDelegate delegate;
 
   GestureFragments({
-    @required this.child,
-    FragmentsDrawDelegate delegate,
+    required this.child,
+    FragmentsDrawDelegate? delegate,
   }) : this.delegate = delegate ?? RadialFragmentsDraw();
 
   @override
@@ -16,7 +16,7 @@ class GestureFragments extends StatefulWidget {
 
 class _GestureFragmentsState extends State<GestureFragments>
     with SingleTickerProviderStateMixin {
-  FragmentsController fragmentsController;
+  late FragmentsController fragmentsController;
 
   Offset startingOffset = Offset.zero;
 

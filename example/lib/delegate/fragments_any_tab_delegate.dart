@@ -5,9 +5,9 @@ import 'package:flutter_fragments/flutter_fragments.dart';
 class FragmentsAnyTabDelegate extends AnyTabDelegate {
   FragmentsAnyTabDelegate({
     fragmentsDrawDelegate,
-    @required this.screenshotController,
-    @required List<Widget> tabs,
-  })  : assert(tabs != null && tabs.length > 0),
+    required this.screenshotController,
+    required List<Widget> tabs,
+  })  : assert(tabs.length > 0),
         this.fragmentsDrawDelegate = fragmentsDrawDelegate ??
             SizeFragmentsDrawDelegate(size: Size(30, 30)),
         super(tabs: tabs);
@@ -28,7 +28,7 @@ class FragmentsAnyTabDelegate extends AnyTabDelegate {
       children: [
         tabs[nextPageIndex],
         Fragments(
-          animation: animation,
+          animation: animation as Animation<double>,
           startingOffset: startingOffset,
           delegate: fragmentsDrawDelegate,
           child: tabs[activeIndex],

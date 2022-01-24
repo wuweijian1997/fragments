@@ -3,11 +3,10 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
-import 'package:flutter_fragments/src/models/index.dart';
 
 class RadialFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   final bool disableTransition;
-  Offset _startingOffset;
+  Offset? _startingOffset;
 
   RadialFragmentsDraw({
     numberOfRow = 20,
@@ -18,10 +17,10 @@ class RadialFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
 
   @override
   void draw({
-    Canvas canvas,
-    ui.Image paintImage,
-    double progress,
-    Offset startingOffset,
+    required Canvas canvas,
+    required ui.Image paintImage,
+    required double progress,
+    required Offset startingOffset,
   }) {
     Paint paint = Paint();
     Size imageSize =
@@ -33,10 +32,10 @@ class RadialFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
       );
       _startingOffset = startingOffset;
     }
-    double maxDistance = startingCoordinate.maxDistance(
+    double maxDistance = startingCoordinate?.maxDistance(
       maxX: numberOfRow - 1,
       maxY: numberOfColumn - 1,
-    );
+    )?? 0;
     for (int i = 0; i < numberOfColumn; i++) {
       for (int j = 0; j < numberOfRow; j++) {
         double currentProgress = calculateFragmentProgress(
@@ -64,10 +63,13 @@ class RadialFragmentsDraw extends RowAndColumnFragmentsDrawDelegate {
   }
 
   double calculateFragmentProgress({
-    double maxDistance,
-    Coordinate currentCoordinate,
+    required double maxDistance,
+    required Coordinate currentCoordinate,
   }) {
-    double distance = currentCoordinate.distance(startingCoordinate);
-    return (distance / maxDistance).clamp(.0, 1.0);
+    if(startingCoordinate != null) {
+      double distance = currentCoordinate.distance(startingCoordinate!);
+      return (distance / maxDistance).clamp(.0, 1.0);
+    }
+    return 0;
   }
 }

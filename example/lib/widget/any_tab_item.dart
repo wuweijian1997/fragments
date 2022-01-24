@@ -5,7 +5,7 @@ class AnyTabItem extends StatelessWidget {
   final AnyTabModel model;
   final double percentage;
 
-  AnyTabItem({this.model, percentage, Key key})
+  AnyTabItem({required this.model, percentage, Key? key})
       : this.percentage = percentage ?? 1,
         super(key: key);
 

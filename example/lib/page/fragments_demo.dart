@@ -6,7 +6,7 @@ class FragmentsDemo extends StatefulWidget {
   static final String title = "Fragments";
   final FragmentsDrawDelegate delegate;
 
-  FragmentsDemo({@required this.delegate});
+  FragmentsDemo({required this.delegate});
 
   @override
   _FragmentsDemoState createState() => _FragmentsDemoState();

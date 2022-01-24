@@ -1,11 +1,10 @@
 name: flutter_fragments
 description: flutter fragments
-version: 0.0.6
+version: 1.0.0
 homepage: https://github.com/wuweijian1997/fragments
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  sdk: ">=2.15.1 <3.0.0"
 
 dependencies:
   flutter:

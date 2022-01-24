@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   final List<_PageModel> list;
 
-  HomePage({this.list});
+  HomePage({required this.list});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,9 @@ class HomePage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                 if(model.page != null) {
-                  return model.page;
+                  return model.page!;
                 }
-                return FragmentsDemo(delegate: model.delegate,);
+                return FragmentsDemo(delegate: model.delegate!,);
               }));
             },
             child: Card(
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                 height: 100,
                 alignment: Alignment.center,
                 child: Text(
-                  model?.title ?? "unKnow",
+                  model.title,
                   style: TextStyle(fontSize: 24),
                 ),
               ),
@@ -76,8 +76,8 @@ class HomePage extends StatelessWidget {
 
 class _PageModel {
   final String title;
-  final FragmentsDrawDelegate delegate;
-  final Widget page;
+  final FragmentsDrawDelegate? delegate;
+  final Widget? page;
 
-  _PageModel({this.title, this.delegate, this.page});
+  _PageModel({required this.title, this.delegate, this.page});
 }

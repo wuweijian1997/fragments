@@ -5,18 +5,18 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_fragments/src/fragments_draw/index.dart';
 
 class FragmentsRenderObjectWidget extends RepaintBoundary {
-  final ui.Image image;
+  final ui.Image? image;
   final double progress;
   final Offset startingOffset;
   final FragmentsDrawDelegate delegate;
 
   FragmentsRenderObjectWidget({
-    Key key,
-    Widget child,
+    Key? key,
+    required Widget child,
     this.image,
-    this.progress,
-    this.startingOffset,
-    this.delegate,
+    required this.progress,
+    required this.startingOffset,
+    required this.delegate,
   }) : super(key: key, child: child);
 
   @override
@@ -40,16 +40,16 @@ class FragmentsRenderObjectWidget extends RepaintBoundary {
 }
 
 class _FragmentsRenderObject extends RenderRepaintBoundary {
-  ui.Image _image;
-  double _progress;
+  ui.Image? _image;
+  double _progress = 0;
   Offset _startingOffset;
   FragmentsDrawDelegate _delegate;
 
   _FragmentsRenderObject({
-    ui.Image image,
-    RenderBox child,
-    Offset startingOffset,
-    FragmentsDrawDelegate delegate,
+    ui.Image? image,
+    RenderBox? child,
+    required Offset startingOffset,
+    required FragmentsDrawDelegate delegate,
   })  : _image = image,
         _delegate = delegate,
         _startingOffset = startingOffset,
@@ -57,20 +57,19 @@ class _FragmentsRenderObject extends RenderRepaintBoundary {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    assert(_delegate != null);
     if (_image != null &&
         _progress != 0 &&
         _progress != 1 &&
-        _progress != null) {
+        _image != null) {
       _delegate.draw(
         canvas: context.canvas,
-        paintImage: _image,
+        paintImage: _image!,
         progress: _progress,
         startingOffset: _startingOffset,
       );
     } else {
       if (child != null) {
-        context.paintChild(child, offset);
+        context.paintChild(child!, offset);
       }
     }
   }
@@ -81,7 +80,7 @@ class _FragmentsRenderObject extends RenderRepaintBoundary {
     markNeedsPaint();
   }
 
-  set image(ui.Image value) {
+  set image(ui.Image? value) {
     if (value == _image) return;
     _image = value;
     markNeedsPaint();
@@ -94,7 +93,7 @@ class _FragmentsRenderObject extends RenderRepaintBoundary {
   }
 
   set delegate(FragmentsDrawDelegate value) {
-    if(value == _delegate) return;
+    if (value == _delegate) return;
     _delegate = value;
     markNeedsPaint();
   }

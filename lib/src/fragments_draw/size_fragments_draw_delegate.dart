@@ -8,10 +8,10 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
   final Size size;
   final bool disableTransition;
 
-  List<List<Rect>> _fragments;
-  Coordinate _startingCoordinate;
-  int numberOfRow;
-  int numberOfColumn;
+  List<List<Rect?>?>? _fragments;
+  Coordinate? _startingCoordinate;
+  late int numberOfRow;
+  late int numberOfColumn;
 
   SizeFragmentsDrawDelegate({
     this.size = const Size(50, 50),
@@ -20,12 +20,12 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
 
   @override
   void draw({
-    Canvas canvas,
-    double progress,
-    ui.Image paintImage,
-    Offset startingOffset,
+    required Canvas canvas,
+    required double progress,
+    required ui.Image paintImage,
+    required Offset startingOffset,
   }) {
-    assert(size != null && !size.isEmpty);
+    assert(!size.isEmpty);
     Paint paint = Paint();
     Size imageSize = Size(
       paintImage.width.toDouble(),
@@ -37,10 +37,11 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
       imageSize: imageSize,
       startingOffset: startingOffset,
     );
-    double maxDistance = _startingCoordinate.maxDistance(
-      maxX: numberOfRow - 1,
-      maxY: numberOfColumn - 1,
-    );
+    double maxDistance = _startingCoordinate?.maxDistance(
+          maxX: numberOfRow - 1,
+          maxY: numberOfColumn - 1,
+        ) ??
+        0;
     for (int i = 0; i < numberOfColumn; i++) {
       for (int j = 0; j < numberOfRow; j++) {
         double currentProgress = calculateFragmentProgress(
@@ -68,48 +69,50 @@ class SizeFragmentsDrawDelegate extends FragmentsDrawDelegate {
   }
 
   void calculateStartingCoordinate({
-    Size size,
-    Size imageSize,
-    Offset startingOffset,
+    required Size size,
+    required Size imageSize,
+    required Offset startingOffset,
   }) {
     int x = ((startingOffset.dx ~/ size.width)).clamp(0, numberOfRow);
     int y = ((startingOffset.dy ~/ size.height)).clamp(0, numberOfColumn);
     _startingCoordinate = Coordinate(x: x, y: y);
   }
 
-  void calculateRowAndColumn({Size size, Size imageSize}) {
+  void calculateRowAndColumn({required Size size, required Size imageSize}) {
     numberOfRow = (imageSize.width / size.width).ceil();
     numberOfColumn = (imageSize.height / size.height).ceil();
   }
 
   double calculateFragmentProgress({
-    double maxDistance,
-    Coordinate currentCoordinate,
+    required double maxDistance,
+    required Coordinate currentCoordinate,
   }) {
-    double distance = currentCoordinate.distance(_startingCoordinate);
-    return (distance / maxDistance).clamp(.0, 1.0);
+    if (_startingCoordinate != null) {
+      double distance = currentCoordinate.distance(_startingCoordinate!);
+      return (distance / maxDistance).clamp(.0, 1.0);
+    }
+    return 0;
   }
 
-  Rect calculateFragment({int i, int j, Size size}) {
-    assert(size != null);
-    assert(i != null && i >= 0);
-    assert(j != null && j >= 0);
+  Rect calculateFragment({required int i, required int j, required Size size}) {
+    assert(i >= 0);
+    assert(j >= 0);
     if (_fragments == null) {
-      _fragments = List(numberOfColumn);
+      _fragments = List.filled(numberOfColumn, null);
     }
-    if (_fragments[i] == null) {
-      _fragments[i] = List(numberOfRow);
+    if (_fragments?[i] == null) {
+      _fragments?[i] = List.filled(numberOfRow, null);
     }
-    if (_fragments[i][j] == null) {
+    if (_fragments?[i]?[j] == null) {
       double fragmentsWidth = size.width;
       double fragmentsHeight = size.height;
-      _fragments[i][j] = Rect.fromLTWH(
+      _fragments![i]![j] = Rect.fromLTWH(
         fragmentsWidth * j,
         fragmentsHeight * i,
         fragmentsWidth,
         fragmentsHeight,
       );
     }
-    return _fragments[i][j];
+    return _fragments![i]![j]!;
   }
 }

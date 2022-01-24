@@ -4,30 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class ScreenshotController {
-  ScreenshotController() {
-    _globalKey = GlobalKey();
-  }
+  ScreenshotController();
 
-  ui.Image _image;
-  GlobalKey _globalKey;
+  ui.Image? _image;
+  GlobalKey _globalKey = GlobalKey();
 
-  ui.Image get image => _image;
+  ui.Image? get image => _image;
 
   GlobalKey get globalKey => _globalKey;
 
-  void start({bool disableCache = false, VoidCallback callback}) {
+  void start({bool disableCache = false, VoidCallback? callback}) {
     if (disableCache == false && image != null) {
-      callback.call();
+      callback?.call();
     } else {
       generateImage(() {
-        callback.call();
+        callback?.call();
       });
     }
   }
 
-  void generateImage(VoidCallback onEnd) {
+  void generateImage(VoidCallback? onEnd) {
     RenderRepaintBoundary boundary =
-        _globalKey.currentContext.findRenderObject();
+    _globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
     boundary.toImage().then((value) {
       _image = value;
       onEnd?.call();
@@ -36,6 +34,5 @@ class ScreenshotController {
 
   void dispose() {
     _image = null;
-    _globalKey = null;
   }
 }

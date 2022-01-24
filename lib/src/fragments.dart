@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_fragments/flutter_fragments.dart';
 import 'package:flutter_fragments/src/rendering/index.dart';
 
@@ -8,18 +7,18 @@ class Fragments extends StatefulWidget {
 
   final ScreenshotController screenshotController;
   final FragmentsDrawDelegate delegate;
-  final Animation animation;
+  final Animation<double> animation;
 
   ///Starting point.range[(0, 0), (child.width, child.height)]
   final Offset startingOffset;
 
   Fragments({
-    Key key,
-    this.child,
-    this.animation,
-    FragmentsDrawDelegate delegate,
+    Key? key,
+    required this.child,
+    required this.animation,
+    FragmentsDrawDelegate? delegate,
     this.startingOffset = Offset.zero,
-    @required this.screenshotController,
+    required this.screenshotController,
   })  : this.delegate = delegate ?? RadialFragmentsDraw(),
         super(key: key);
 
